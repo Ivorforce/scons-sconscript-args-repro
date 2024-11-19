@@ -1,0 +1,17 @@
+opts = Variables(None, ARGUMENTS)
+
+env = Environment()
+
+opts.Add("framework_opt", default="framework_opt_default")
+
+opts.Update(env)
+
+unknown = opts.UnknownVariables()
+if unknown:
+    print("WARNING: Unknown SCons variables were passed and will be ignored:")
+    for item in unknown.items():
+        print("    " + item[0] + "=" + item[1])
+
+print(f"Framework Opt: {env['framework_opt']}")
+
+Return("env")
